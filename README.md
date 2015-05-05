@@ -6,3 +6,6 @@ https://gorails.com/setup/ubuntu/14.10
 
 # Create role
 create role Rapture with createdb login password 'azerty123';
+
+# themoviedb API doc
+git config --global credential.helper wincred
