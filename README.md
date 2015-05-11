@@ -9,3 +9,5 @@ create role Rapture with createdb login password 'azerty123';
 
 # themoviedb API doc
 https://github.com/ahmetabdi/themoviedb/
+http://guides.railsgirls.com/devise/
+https://github.com/seyhunak/twitter-bootstrap-rails
