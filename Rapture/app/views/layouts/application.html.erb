@@ -2,28 +2,52 @@
 <html>
 <head>
   <title>Rapture</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <link href="/WinJS/css/ui-dark.css" rel="stylesheet">
+  <script src="/WinJS/js/WinJS.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
+
 <p class="navbar-text pull-right">
-<% if user_signed_in? %>
-  Logged in as <strong><%= current_user.email %></strong>.
-  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
+<div id="app">
+    <div class="splitView" data-win-control="WinJS.UI.SplitView">
+        <!-- Pane area -->
+        <div>
+            <div class="header">
+                <button type="button" class="win-splitview-button" onclick="Sample.togglePane();"></button>
+                <div class="title">SplitView Pane area</div>
+            </div>
 
-<%= yield %>
-<% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
-<% end %>
-<% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
+            <div class="nav-commands">
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favoris', icon: 'favorite'}"></div>
+                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Paramètre', icon: 'settings'}"></div>
+            </div>
+        </div>
 
+        <!-- Content area -->
+        <div class="contenttext"><h2>SplitView Content area</h2>
+			<% if user_signed_in? %>
+			  Logged in as <strong><%= current_user.email %></strong>.
+			  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+			  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+			<% else %>
+			  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+			  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+			<% end %>
+
+			<%= yield %>
+			<% if notice %>
+			  <p class="alert alert-success"><%= notice %></p>
+			<% end %>
+			<% if alert %>
+			  <p class="alert alert-danger"><%= alert %></p>
+			<% end %>
+        </div>
+    </div> 
+</div>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
