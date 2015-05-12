@@ -7,21 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<p class="navbar-text pull-right">
 <div id="app">
     <div class="splitView" data-win-control="WinJS.UI.SplitView">
         <!-- Pane area -->
         <div>
             <div class="header">
-                <button type="button" class="win-splitview-button" onclick="Sample.togglePane();"></button>
+                <button class="win-splitview-button" onclick="Sample.togglePane();"></button>
                 <div class="title">SplitView Pane area</div>
             </div>
 
             <div class="nav-commands">
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Favoris', icon: 'favorite'}"></div>
-                <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Paramètre', icon: 'settings'}"></div>
+            	<%= link_to root_path, :class => 'win-splitview-link' do%>
+					<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
+            	<% end %>
+
+				<% if user_signed_in? %>
+	            	<%= link_to root_path, :class => 'win-splitview-link' do%>
+	                	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}"></div>
+	                <% end %>
+				<% end %>
+
+            	<%= link_to root_path, :class => 'win-splitview-link' do%>
+                	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Paramètres', icon: 'settings'}"></div>
+                <% end %>
+
+                <%#= link_to 'Edit profile', edit_user_registration_path, data: { "win-control": "WinJS.UI.NavBarCommand", "win-options": "{ label: 'Accueil', icon: 'home'}" } %>
             </div>
         </div>
 
