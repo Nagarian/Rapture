@@ -12,8 +12,16 @@
     	<%= film['title'] %></br>
     	<%= film['overview'] %>
 
+    <!--	<%= current_user.films.new({id_film: film['id'], seen: false}) %>
+    	<%= current_user.save %> -->
     	
 
     </div></a>
 
     <% end %>
+
+<!--
+    <%= lastfilmer = current_user.films.last.id_film %>
+    <%= lastMovie = Tmdb::Movie.detail(lastfilmer) %> -->
+    <h1>Last added Film</h1>
+    <%= image_tag("#{@configuration.base_url}w300#{lastMovie['poster_path']}") %>
