@@ -4,24 +4,25 @@
 
 <% @films.each do |film| %>
     
-    <%#= link_to film.id, film_path(film) %><div>
-    	
-
-    	<%= image_tag("#{@configuration.base_url}w300#{film['poster_path']}") %>
+    <%#= link_to film.id, film_path(film) %>
+    <div>
+		<%= image_tag("#{@configuration.base_url}w300#{film['poster_path']}") %>
 
     	<%= film['title'] %></br>
     	<%= film['overview'] %>
 
-    <!--	<%= current_user.films.new({id_film: film['id'], seen: false}) %>
-    	<%= current_user.save %> -->
-    	
+		<% if user_signed_in? %>
+	    <!--<%= current_user.films.new({id_film: film['id'], seen: false}) %>
+    		<%= current_user.save %> -->
+		<% end %>
 
-    </div></a>
+    </div>
+<% end %>
 
-    <% end %>
-
+<% if user_signed_in? %>
 <!--
     <%= lastfilmer = current_user.films.last.id_film %>
     <%= lastMovie = Tmdb::Movie.detail(lastfilmer) %> -->
     <h1>Last added Film</h1>
     <%= image_tag("#{@configuration.base_url}w300#{lastMovie['poster_path']}") %>
+<% end %>
