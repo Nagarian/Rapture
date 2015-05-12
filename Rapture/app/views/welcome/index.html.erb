@@ -3,11 +3,19 @@
 <h1>Welcome#index</h1>
 <p>Find me in app/views/welcome/index.html.erb</p>
 
+
 <% @films.each do |film| %>
     
     <%#= link_to film.id, film_path(film) %><div>
-    	<%= film.title %></br>
-    	<%= film.overview %>
+    	
+
+    	<%= image_tag("#{@configuration.base_url}w300#{film['poster_path']}") %>
+
+    	<%= film['title'] %></br>
+    	<%= film['overview'] %>
+
+    	
+
     </div></a>
 
     <% end %>
