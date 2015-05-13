@@ -15,18 +15,46 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require_tree .
-WinJS.Namespace.define("Sample", {
+WinJS.Namespace.define("App", {
     splitView: null,
     togglePane: WinJS.UI.eventHandler(function (ev) {
-        if (Sample.splitView) {
-            Sample.splitView.paneHidden = !Sample.splitView.paneHidden;
+        if (App.splitView) {
+            App.splitView.paneHidden = !App.splitView.paneHidden;
         }
-    })
+    }),
+    
+    animation: {
+    	addPointerDown: function addPointerDownHandlers(target) {
+    		function onPointerDown(evt) {
+		    	WinJS.UI.Animation.pointerDown(evt.target);
+			    evt.preventDefault();
+			}
+
+		    target.addEventListener("pointerdown", onPointerDown, false);
+		    target.addEventListener("touchstart", onPointerDown, false);
+		    target.addEventListener("mousedown", onPointerDown, false);
+		},
+		addPointerUp: function addPointerUpHandlers(target) {
+			function onPointerUp(evt) {
+			    WinJS.UI.Animation.pointerUp(evt.target);
+			    evt.preventDefault();
+			}
+
+		    target.addEventListener("pointerup", onPointerUp, false);
+		    target.addEventListener("touchend", onPointerUp, false);
+		    target.addEventListener("mouseup", onPointerUp, false);
+		}
+    }
 });
 
-WinJS.Binding.processAll(null, Sample).then(function () {
+WinJS.Binding.processAll(null, App).then(function () {
     WinJS.UI.processAll().done(function () {
-        Sample.splitView = document.querySelector(".splitView").winControl;
-        new WinJS.UI._WinKeyboard(Sample.splitView.paneElement); // Temporary workaround: Draw keyboard focus visuals on NavBarCommands
+        App.splitView = document.querySelector(".splitView").winControl;
+        new WinJS.UI._WinKeyboard(App.splitView.paneElement); // Temporary workaround: Draw keyboard focus visuals on NavBarCommands
+
+        var target1 = document.getElementById("MenuButton");
+		
+		App.animation.addPointerDown(target1);
+		App.animation.addPointerUp(target1);
     });
 })

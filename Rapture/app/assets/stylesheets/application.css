@@ -24,9 +24,10 @@
     }
 
     #app .title {
+    	color:#7D0087;
         font-size: 25px;
         left: 50px;
-        margin-top: 6px;
+        margin-top: 10px;
         vertical-align: middle;
         display: inline-block;
     }
@@ -62,6 +63,7 @@
 
 /*SplitView pane show button style*/
 button.win-splitview-button {
+	color:#7D0087;
     float: left;
     box-sizing: border-box;
     height: 48px;
