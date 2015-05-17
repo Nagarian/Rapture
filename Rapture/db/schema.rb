@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20150512092255) do
 
   create_table "films", force: :cascade do |t|
     t.integer  "id_film"
-    t.boolean  "seen"
     t.integer  "user_id"
+    t.boolean  "seen"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

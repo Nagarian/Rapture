@@ -23,7 +23,7 @@
 
 				<% if user_signed_in? %>
 	            	<%= link_to edit_user_registration_path, :class => 'win-splitview-link' do%>
-	                	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}"></div>
+	                	<div class="navbarCommand" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}"></div>
 	                <% end %>
 
 	            	<%= link_to destroy_user_session_path, :class => 'win-splitview-link' do%>

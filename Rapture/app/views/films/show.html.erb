@@ -12,7 +12,12 @@
 
 <p>
   <strong>User:</strong>
-  <%= @film.user %>
+  <%= @film.user.to_json %>
+</p>
+
+<p>
+  <strong>Titre original:</strong>
+  <%= @film.detail['original_title'] %>
 </p>
 
 <%= link_to 'Edit', edit_film_path(@film) %> |
