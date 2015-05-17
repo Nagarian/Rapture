@@ -16,8 +16,13 @@
 </p>
 
 <p>
-  <strong>Titre original:</strong>
-  <%= @film.detail['original_title'] %>
+  <strong>Détail</strong>
+  <%= @film.detail %>
+</p>
+
+<p>
+  <strong>Image</strong>
+  <%= @film.images %>
 </p>
 
 <%= link_to 'Edit', edit_film_path(@film) %> |
