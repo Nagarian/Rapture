@@ -56,9 +56,9 @@
     background-color: rgb(112,112,112);
 }*/
 
-#app .contenttext {
-    margin-left: 20px;
-    margin-top: 6px;
+#app .win-splitview-content {
+    padding-left: 20px;
+    padding-top: 6px;
     height: 100%;
     overflow: auto;
 }

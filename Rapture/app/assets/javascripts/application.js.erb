@@ -22,6 +22,17 @@ WinJS.Namespace.define("App", {
             App.splitView.paneHidden = !App.splitView.paneHidden;
         }
     }),
+
+    navigation: {
+    	showHome: WinJS.UI.eventHandler(function (ev) {
+    		var renderHost = document.querySelector(".win-splitview-content");
+            WinJS.Utilities.empty(renderHost);
+	        WinJS.UI.Pages.render("/movies/home", renderHost, {
+	            controlText: "This control created by calling WinJS.UI.Pages.render",
+	            message: "Render control"
+	        }).done();
+    	})
+    },
     
     animation: {
     	addPointerDown: function addPointerDownHandlers(target) {
@@ -44,6 +55,12 @@ WinJS.Namespace.define("App", {
 		    target.addEventListener("touchend", onPointerUp, false);
 		    target.addEventListener("mouseup", onPointerUp, false);
 		}
+    },
+
+    converter: {
+    	tmdbConverter: WinJS.Binding.converter(function (url) {
+            return "<%= Tmdb::Configuration.new.base_url + 'w300' %>" + url;
+        })
     }
 });
 
@@ -56,5 +73,7 @@ WinJS.Binding.processAll(null, App).then(function () {
 		
 		App.animation.addPointerDown(target1);
 		App.animation.addPointerUp(target1);
+
+        App.navigation.showHome(null);
     });
-})
+});

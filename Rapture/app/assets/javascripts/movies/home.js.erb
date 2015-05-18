@@ -1,0 +1,25 @@
+function callback(responseText, status) {
+    if (status === 200) {
+        var items = JSON.parse(responseText);
+        
+		WinJS.Namespace.define("App.home", {
+		    data: new WinJS.Binding.List(items)
+		});
+		WinJS.UI.processAll();
+    } else {
+        output("Error obtaining feed. XHR status code: " + status);
+    }
+}
+
+function output(s) {
+    document.getElementById("content").innerHTML += s;
+}
+
+WinJS.xhr({ url: '/movies/home.json', type: 'GET' }).done(
+    function (result) {
+        callback(result.responseText, result.status);
+    },
+    function (result) {
+        callback(null, result.status);
+    }
+);

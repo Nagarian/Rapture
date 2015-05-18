@@ -1,0 +1,24 @@
+<div class="smallListIconTextTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
+    <div class="smallListIconTextItem">
+        <img src="#" class="smallListIconTextItem-Image" data-win-bind="src: poster_path App.converter.tmdbConverter" />
+        <div class="smallListIconTextItem-Detail">
+            <h4 data-win-bind="textContent: title"></h4>
+            <h6 data-win-bind="textContent: overview"></h6>
+        </div>
+    </div>
+</div>
+
+<div id="listView"
+     class="win-selectionstylefilled"
+     data-win-control="WinJS.UI.ListView"
+     data-win-options="{
+            itemDataSource: App.home.data.dataSource,
+            itemTemplate: select('.smallListIconTextTemplate'),
+            selectionMode: 'none',
+            tapBehavior: 'none',
+            layout: { type: WinJS.UI.GridLayout, orientation: 'vertical' }
+    }">
+</div>
+
+<%= stylesheet_link_tag    'movies/home', media: 'all', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'movies/home', 'data-turbolinks-track' => true %>

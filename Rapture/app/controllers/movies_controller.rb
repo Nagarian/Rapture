@@ -1,9 +1,12 @@
 class MoviesController < ApplicationController
 
   # GET /movies.json
-  def index
+  def home
     @movies = Tmdb::Movie.upcoming
-    render json: @movies
+    respond_to do |format|
+      format.html { render "movies/home", layout: false }
+      format.json { render json: @movies }
+    end
   end
 
 end
