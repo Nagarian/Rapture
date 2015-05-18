@@ -3,29 +3,32 @@
     width: 100%;
 }*/
 
+.win-container {
+    margin: 2px !important;
+}
+
 /* Template for the items in the ListViews in this sample */       
-.smallListIconTextItem
+.homePosterTemplateItem
 {
-    width: 242px;
-    height: 70px;
-    padding: 5px;
+    /*width: 300px;
+    height: 500px;*/
     overflow: hidden;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
+    flex-direction: column;
 }
 
-    .smallListIconTextItem img.smallListIconTextItem-Image 
+    .homePosterTemplateItem img.homePosterTemplateItem-Image 
     {
-        width: 60px;
-        height: 60px;
-        margin: 5px;
-        margin-right:20px;
+        width: 300px;
+        height: 450px;
     }
 
-    .smallListIconTextItem .smallListIconTextItem-Detail
+    .homePosterTemplateItem .homePosterTemplateItem-Detail
     {
         margin: 5px;
+        text-align: center;
     }
 
    .listLayoutTopHeaderTemplateRoot {
