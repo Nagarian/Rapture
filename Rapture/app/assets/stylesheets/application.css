@@ -59,6 +59,8 @@
 #app .contenttext {
     margin-left: 20px;
     margin-top: 6px;
+    height: 100%;
+    overflow: auto;
 }
 
 /*SplitView pane show button style*/
