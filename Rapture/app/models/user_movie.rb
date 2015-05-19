@@ -1,4 +1,4 @@
-class Film < ActiveRecord::Base
+class UserMovie < ActiveRecord::Base
   belongs_to :user
 
   def detail

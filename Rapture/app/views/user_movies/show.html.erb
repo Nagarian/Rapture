@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Movie:</strong>
+  <%= @user_movie.movie_id %>
+</p>
+
+<p>
+  <strong>Is seen:</strong>
+  <%= @user_movie.is_seen %>
+</p>
+
+<%= link_to 'Edit', edit_user_movie_path(@user_movie) %> |
+<%= link_to 'Back', user_movies_path %>
