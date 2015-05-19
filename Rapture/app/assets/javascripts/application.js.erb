@@ -24,14 +24,18 @@ WinJS.Namespace.define("App", {
     }),
 
     navigation: {
-    	showHome: WinJS.UI.eventHandler(function (ev) {
+    	showHome: function (categorie) {
     		var renderHost = document.querySelector(".win-splitview-content");
             WinJS.Utilities.empty(renderHost);
 	        WinJS.UI.Pages.render("/movies/home", renderHost, {
-	            controlText: "This control created by calling WinJS.UI.Pages.render",
-	            message: "Render control"
-	        }).done();
-    	})
+                categorie: categorie
+            });
+    	},
+        navigate: function (uri, parameters) {
+            var renderHost = document.querySelector(".win-splitview-content");
+            WinJS.Utilities.empty(renderHost);
+            WinJS.UI.Pages.render(uri, renderHost, parameters);
+        }
     },
     
     animation: {
@@ -74,6 +78,6 @@ WinJS.Binding.processAll(null, App).then(function () {
 		App.animation.addPointerDown(target1);
 		App.animation.addPointerUp(target1);
 
-        App.navigation.showHome(null);
+        App.navigation.showHome('popular');
     });
 });

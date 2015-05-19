@@ -17,33 +17,33 @@
             </div>
 
             <div class="nav-commands">
-            	<%= link_to '#', :class => 'win-splitview-link' do%>
-					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('popular');" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
+            	<%= link_to '#popular', :class => 'win-splitview-link' do%>
+					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('popular');" data-win-options="{ label: 'Film tendance', tooltip:'Voir les films populaires du moment', icon: 'up'}"></div>
             	<% end %>
 
-              <%= link_to '#', :class => 'win-splitview-link' do%>
-                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('upcoming');" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
+              <%= link_to '#upcoming', :class => 'win-splitview-link' do%>
+                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('upcoming');" data-win-options="{ label: 'A venir', tooltip:'Voir les films à venir', icon: 'redo'}"></div>
               <% end %>
 
               <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />
 
       				<% if user_signed_in? %>
-	            	<%= link_to edit_user_registration_path, :class => 'win-splitview-link' do%>
-                	  <div class="navbarCommand" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}"></div>
+	            	<%= link_to "##{edit_user_registration_path}", :class => 'win-splitview-link' do%>
+                	  <div class="navbarCommand" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}" onclick="App.navigation.navigate('<%=edit_user_registration_path%>');"></div>
                 <% end %>
 
-	            	<%= link_to destroy_user_session_path, :class => 'win-splitview-link' do%>
-                	  <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Déconnexion', icon: 'blockcontact', tooltip: 'Se déconnecter de <%= current_user.email %>'}"></div>
+	            	<%= link_to "##{destroy_user_session_path}", :class => 'win-splitview-link' do%>
+                	  <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Déconnexion', icon: 'blockcontact', tooltip: 'Se déconnecter de <%= current_user.email %>'}" onclick="App.navigation.navigate('<%=destroy_user_session_path%>');"></div>
       	        <% end %>
 
               <% else %>
 
-      	       	<%= link_to new_user_registration_path, :class => 'win-splitview-link' do%>
-      	            <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Inscription', icon: 'addfriend', tooltip: 'Créer un compte'}"></div>
+      	       	<%= link_to "##{new_user_registration_path}", :class => 'win-splitview-link' do%>
+      	            <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Inscription', icon: 'addfriend', tooltip: 'Créer un compte'}" onclick="App.navigation.navigate('<%=new_user_registration_path%>');"></div>
       	        <% end %>
 
-      	        <%= link_to new_user_session_path, :class => 'win-splitview-link' do%>
-      	          	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Connexion', icon: 'contact', tooltip: 'Se connecter'}"></div>
+      	        <%= link_to "##{new_user_session_path}", :class => 'win-splitview-link' do%>
+      	          	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Connexion', icon: 'contact', tooltip: 'Se connecter'}" onclick="App.navigation.navigate('<%=new_user_session_path%>');"></div>
       	        <% end %>
 
       				<% end %>
