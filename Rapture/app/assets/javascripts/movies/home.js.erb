@@ -15,7 +15,7 @@ function output(s) {
     document.getElementById("content").innerHTML += s;
 }
 
-WinJS.xhr({ url: '/movies/home.json', type: 'GET' }).done(
+WinJS.xhr({ url: '/movies/popular.json', type: 'GET' }).done(
     function (result) {
         callback(result.responseText, result.status);
     },
