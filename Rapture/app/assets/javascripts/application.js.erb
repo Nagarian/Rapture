@@ -64,6 +64,9 @@ WinJS.Namespace.define("App", {
     converter: {
     	tmdbConverter: WinJS.Binding.converter(function (url) {
             return "<%= Tmdb::Configuration.new.base_url + 'w300' %>" + url;
+        }),
+        idConverter: WinJS.Binding.converter(function (url) {
+            return "#/user_movie/" + url;
         })
     }
 });

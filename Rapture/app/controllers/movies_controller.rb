@@ -10,6 +10,11 @@ class MoviesController < ApplicationController
   # GET /movies.json
   def popular
     @movies = Tmdb::Movie.popular
+
+    #movie = Array.new
+    #movie.add(Tmdb::Find.imdb_id(current_user.user_movies.last.id))
+
+
     respond_to do |format|
       format.html { render "movies/home", layout: false }
       format.json { render json: @movies }
