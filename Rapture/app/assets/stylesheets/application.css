@@ -36,6 +36,12 @@
     #app .nav-commands {
         margin-top: 20px;
     }
+    
+hr.win-command-horizontal {
+    height: 2px !important;
+    width: 28px !important;
+    margin: 10px !important;
+}
 
 .win-navbarcommand-button {
     background-color: transparent;

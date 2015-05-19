@@ -18,8 +18,14 @@
 
             <div class="nav-commands">
             	<%= link_to '#', :class => 'win-splitview-link' do%>
-					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome();" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
+					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('popular');" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
             	<% end %>
+
+              <%= link_to '#', :class => 'win-splitview-link' do%>
+                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('upcoming');" data-win-options="{ label: 'Accueil', icon: 'home'}"></div>
+              <% end %>
+
+              <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />
 
       				<% if user_signed_in? %>
 	            	<%= link_to edit_user_registration_path, :class => 'win-splitview-link' do%>
@@ -41,6 +47,8 @@
       	        <% end %>
 
       				<% end %>
+              
+              <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />
 
             	<%= link_to root_path, :class => 'win-splitview-link' do%>
                 	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Paramètres', icon: 'settings'}"></div>
