@@ -16,6 +16,7 @@
 .content,
 #app {
     height: 100%;
+    background-color: #343434;
 }
 
     /* SplitView pane content style*/
