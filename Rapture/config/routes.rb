@@ -3,15 +3,13 @@ Rails.application.routes.draw do
   resources :user_movies
 
   resources :films
-
-  get 'welcome/index'
-
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'welcome#index'
+  get 'movies/home'
   get 'movies/popular'
   get 'movies/upcoming'
   # Example of regular route:

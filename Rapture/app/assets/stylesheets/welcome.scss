@@ -1,3 +1,34 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.loadingIcon {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin: 200px;
+}
+
+.glyphicon {
+    margin-right: 20px;
+}
+
+.glyphicon-refresh:before {
+    font-size: 24px;
+    font-family: 'Segoe MDL2 Assets', 'Symbols' !important;
+    content: "\E117" !important;
+}
+.glyphicon-refresh-animate {
+    -animation: spin .7s infinite linear;
+    -webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+    from { -webkit-transform: rotate(0deg);}
+    to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+    from { transform: scale(1) rotate(0deg);}
+    to { transform: scale(1) rotate(360deg);}
+}
