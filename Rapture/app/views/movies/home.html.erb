@@ -1,8 +1,9 @@
 <div class="homePosterTemplateTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
     <div class="homePosterTemplateItem">
-        <img src="#" class="homePosterTemplateItem-Image" data-win-bind="src: poster_path App.converter.tmdbConverter" />
+        
+            <img src="#" class="homePosterTemplateItem-Image" data-win-bind="src: poster_path App.converter.tmdbConverter" />
 
-        <button style="background-color: #A20025;color: white">Seen</button>
+        <a href="#" class="button2" style="background-color: #A20025;color: white" data-win-bind="href: id App.converter.idConverter;" style=>Seen</a>
         <!--<div class="homePosterTemplateItem-Detail">
             <h4 data-win-bind="textContent: title"></h4>
             <!--<h6 data-win-bind="textContent: overview"></h6>
@@ -17,10 +18,13 @@
             itemDataSource: App.home.data.dataSource,
             itemTemplate: select('.homePosterTemplateTemplate'),
             selectionMode: 'none',
-            tapBehavior: 'none',
+            tapBehavior: 'single',
             layout: { type: WinJS.UI.GridLayout, orientation: 'vertical' }
     }">
 </div>
+
+
+
 
 <%= stylesheet_link_tag    'movies/home', media: 'all', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'movies/home', 'data-turbolinks-track' => true %>

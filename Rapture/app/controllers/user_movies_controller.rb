@@ -26,6 +26,9 @@ class UserMoviesController < ApplicationController
   def create
     @user_movie = UserMovie.new(user_movie_params)
 
+    current_user.user_movie.push(@user_movie)
+    current_user.save
+
     respond_to do |format|
       if @user_movie.save
         format.html { redirect_to @user_movie, notice: 'User movie was successfully created.' }
@@ -35,6 +38,8 @@ class UserMoviesController < ApplicationController
         format.json { render json: @user_movie.errors, status: :unprocessable_entity }
       end
     end
+
+
   end
 
   # PATCH/PUT /user_movies/1

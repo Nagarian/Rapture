@@ -60,8 +60,11 @@ WinJS.Namespace.define("App", {
     converter: {
     	tmdbConverter: WinJS.Binding.converter(function (url) {
             return "<%= Tmdb::Configuration.new.base_url + 'w300' %>" + url;
+        }),
+        idConverter: WinJS.Binding.converter(function (url) {
+            return "/user_movie/" + url;
         })
-    }
+    },
 });
 
 WinJS.Binding.processAll(null, App).then(function () {
@@ -74,6 +77,6 @@ WinJS.Binding.processAll(null, App).then(function () {
 		App.animation.addPointerDown(target1);
 		App.animation.addPointerUp(target1);
 
-        App.navigation.showHome(null);
+        //App.navigation.showHome(null);
     });
-});
+}
