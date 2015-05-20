@@ -32,9 +32,17 @@
     }
 
     .homePosterTemplateItem-ButtonSeen {
-        width:100%;
-        background-color: #A20025;
-        color: white
+        width:50%;
+        background-color: #1BA1E2;
+        color: white;
+        float: left;
+    }
+
+    .homePosterTemplateItem-ButtonFavorite {
+        width:50%;
+        background-color: #E3C800;
+        color: white;
+        float: left;
     }
 
    .listLayoutTopHeaderTemplateRoot {
