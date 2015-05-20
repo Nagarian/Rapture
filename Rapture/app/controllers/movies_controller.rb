@@ -26,12 +26,15 @@ class MoviesController < ApplicationController
   end
 
   def userMovies
-    movie = Array.new
-    movie.push(Tmdb::Find.imdb_id(current_user.user_movies.last.id))
+    movies = Array.new
+
+    current_user.user_movies.each do |movie|
+      movies.push(Tmdb::Movie.detail(movie.movie_id))
+    end
 
     respond_to do |format|
       format.html { render "movies/home", layout: false }
-      format.json { render json: movie }
+      format.json { render json: movies }
     end
   end
 end
