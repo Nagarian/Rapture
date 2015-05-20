@@ -28,7 +28,14 @@
               <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />
 
       				<% if user_signed_in? %>
-	            	<%= link_to "##{edit_user_registration_path}", :class => 'win-splitview-link' do%>
+	            	
+                <%= link_to '#userMovies', :class => 'win-splitview-link' do%>
+                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('userMovies');" data-win-options="{ label: 'Mes films', tooltip:'Voir les films de ma liste', icon: 'favorite'}"></div>
+                <% end %>
+
+                <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />
+
+                <%= link_to "##{edit_user_registration_path}", :class => 'win-splitview-link' do%>
                 	  <div class="navbarCommand" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}" onclick="App.navigation.navigate('<%=edit_user_registration_path%>');"></div>
                 <% end %>
 
