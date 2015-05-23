@@ -89,6 +89,15 @@ WinJS.Binding.processAll(null, App).then(function () {
 		App.animation.addPointerDown(target1);
 		App.animation.addPointerUp(target1);
 
-        App.navigation.showHome('popular');
+        if (window.location.hash != "") {
+            var hash = window.location.hash.substring(1);
+            if (hash.startsWith("/")) {
+                App.navigation.navigate(hash);
+            } else {
+                App.navigation.showHome(hash);
+            }
+        } else {
+            App.navigation.showHome('popular');
+        }
     });
 });
