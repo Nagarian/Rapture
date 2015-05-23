@@ -18,11 +18,19 @@
 
             <div class="nav-commands">
             	<%= link_to '#popular', :class => 'win-splitview-link' do%>
-					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('popular');" data-win-options="{ label: 'Film tendance', tooltip:'Voir les films populaires du moment', icon: 'up'}"></div>
+					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('popular');" data-win-options="{ label: 'Film tendance', tooltip:'Voir les films populaires du moment', icon: 'go'}"></div>
             	<% end %>
+
+              <%= link_to '#now_playing', :class => 'win-splitview-link' do%>
+                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('now_playing');" data-win-options="{ label: 'Dans les salles', tooltip:'Voir les films actuellement disponible dans les salles', icon: 'right'}"></div>
+              <% end %>
 
               <%= link_to '#upcoming', :class => 'win-splitview-link' do%>
                   <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('upcoming');" data-win-options="{ label: 'A venir', tooltip:'Voir les films à venir', icon: 'redo'}"></div>
+              <% end %>
+
+              <%= link_to '#top_rated', :class => 'win-splitview-link' do%>
+                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('top_rated');" data-win-options="{ label: 'Les incontournables', tooltip:'Voir les films les plus cultes', icon: 'slideshow'}"></div>
               <% end %>
 
               <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />

@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   private
     Tmdb::Api.key("78bf89f89e8823557d092c0602767586")
+    Tmdb::Api.language("fr")
     # before_action :authenticate_user!
     def set_config
     	@configuration = Tmdb::Configuration.new

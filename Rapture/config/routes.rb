@@ -8,8 +8,10 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'welcome#index'
   get 'movies/home'
-  get 'movies/popular'
+  get 'movies/now_playing'
   get 'movies/upcoming'
+  get 'movies/popular'
+  get 'movies/top_rated'
   get 'movies/mymovies' => 'movies#user_movies'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
