@@ -13,18 +13,16 @@
  *= require_tree .
  *= require_self
  */
-.content,
 #app {
     height: 100%;
     background-color: #343434;
-}
+    color: white;
 
-    /* SplitView pane content style*/
-    #app .header {
+    .header {
         white-space: nowrap;
     }
 
-    #app .title {
+    .title {
     	color:#BD40C7;
         font-size: 25px;
         left: 50px;
@@ -33,46 +31,46 @@
         display: inline-block;
     }
 
-    #app .nav-commands {
+    .nav-commands {
         margin-top: 20px;
     }
-    
-hr.win-command-horizontal {
-    height: 2px !important;
-    width: 28px !important;
-    margin: 10px !important;
+
+    a.win-splitview-link {
+        text-decoration: none;
+    }
+        
+    hr.win-command-horizontal {
+        height: 2px !important;
+        width: 28px !important;
+        margin: 10px !important;
+    }
+
+    .win-splitview-pane-hidden {
+
+        .win-navbarcommand-button {
+            width: 46px;
+        }
+
+        .win-navbarcommand-label {
+            visibility: hidden;
+        }
+    }
+
+    .win-splitview-content {
+        /*padding-left: 20px;
+        padding-top: 6px;*/
+        height: 100%;
+        overflow: auto;
+    }
 }
 
 .win-navbarcommand-button {
     background-color: transparent;
 }
 
-#app .win-splitview-pane-hidden .win-navbarcommand-button {
-    width: 46px;
-}
-
-#app .win-splitview-pane-hidden .win-navbarcommand-label {
-    /* Workaround: Make sure pane doesn't scroll if ContentDialog restores focus to
-       NavBarCommand's label
-    */
-    visibility: hidden;
-}
-
-/*SplitView content style*/
-/*#app .win-splitview-content {
-    background-color: rgb(112,112,112);
-}*/
-
-#app .win-splitview-content {
-    /*padding-left: 20px;
-    padding-top: 6px;*/
-    height: 100%;
-    overflow: auto;
-}
-
 /*SplitView pane show button style*/
 button.win-splitview-button {
-	color:#9D20A7;
+    color:#9D20A7;
     float: left;
     box-sizing: border-box;
     height: 48px;
@@ -84,28 +82,24 @@ button.win-splitview-button {
     margin: 0;
     outline: none;
     background-color: transparent;
-}
+    
+    &:after {
+        font-size: 24px;
+        font-family: 'Segoe MDL2 Assets', 'Symbols';
+        content: "\E700";
+    }
 
-a.win-splitview-link {
-	text-decoration: none;
+    &:active,
+    &:hover:active {
+        background-color: rgba(255,255,255, 0.2);
+    }
+
+    .win-keyboard:focus {
+        border-color: rgb(255, 255, 255);
+    }
 }
 
 html.win-hoverable button.win-splitview-button:hover {
     background-color: rgba(255,255,255, 0.1);
     color:#BD40C7;
-}
-
-button.win-splitview-button.win-splitview-button:active,
-button.win-splitview-button.win-splitview-button:hover:active {
-    background-color: rgba(255,255,255, 0.2);
-}
-
-button.win-splitview-button.win-keyboard:focus {
-    border-color: rgb(255, 255, 255);
-}
-
-button.win-splitview-button:after {
-    font-size: 24px;
-    font-family: 'Segoe MDL2 Assets', 'Symbols';
-    content: "\E700";
 }

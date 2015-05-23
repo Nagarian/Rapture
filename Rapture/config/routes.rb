@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get 'movies/home'
   get 'movies/popular'
   get 'movies/upcoming'
-  get 'movies/userMovies'
+  get 'movies/mymovies' => 'movies#user_movies'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

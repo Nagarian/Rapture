@@ -13,7 +13,7 @@ class MoviesController < ApplicationController
 
     respond_to do |format|
       format.html { render "movies/home", layout: false }
-      format.json { render json: @movies }
+      format.json { render "movies/home" }
     end
   end
 
@@ -25,16 +25,10 @@ class MoviesController < ApplicationController
     end
   end
 
-  def userMovies
-    movies = Array.new
-
-    current_user.user_movies.each do |movie|
-      movies.push(Tmdb::Movie.detail(movie.movie_id))
-    end
-
+  def user_movies
     respond_to do |format|
       format.html { render "movies/home", layout: false }
-      format.json { render json: movies }
+      format.json { render "movies/my_movies" }
     end
   end
 end

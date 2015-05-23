@@ -26,7 +26,7 @@ class UserMoviesController < ApplicationController
   def create
     @user_movie = UserMovie.new(user_movie_params)
 
-    current_user.user_movie.push(@user_movie)
+    current_user.user_movies.push(@user_movie)
     current_user.save
 
     respond_to do |format|

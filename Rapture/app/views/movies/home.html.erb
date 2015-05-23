@@ -1,10 +1,10 @@
 <div class="homePosterTemplateTemplate" data-win-control="WinJS.Binding.Template" style="display: none">
     <div class="homePosterTemplateItem">
-            <img src="#" class="homePosterTemplateItem-Image" data-win-bind="src: poster_path App.converter.tmdbConverter" />
+        <img src="#" class="homePosterTemplateItem-Image" data-win-bind="src: movie.poster_path App.converter.tmdbConverter" />
 
         <div style="margin-top:3px;margin-bottom:8px">
             <a href="#"><button class="homePosterTemplateItem-ButtonFavorite">Favorite</button></a>
-            <a href="#" data-win-bind="href: id"><button class="homePosterTemplateItem-ButtonSeen"></a>Seen</button>
+            <a href="#"><button class="homePosterTemplateItem-ButtonSeen">Seen</button></a>
         </div>
         <!--<div class="homePosterTemplateItem-Detail">
             <h4 data-win-bind="textContent: title"></h4>
@@ -19,8 +19,8 @@
      data-win-options="{
             itemDataSource: App.home.data.dataSource,
             itemTemplate: select('.homePosterTemplateTemplate'),
-            selectionMode: 'none',
-            tapBehavior: 'single',
+            selectionMode: 'single',
+            tapBehavior: 'directSelect',
             layout: { type: WinJS.UI.GridLayout, orientation: 'vertical' }
     }">
 </div>
