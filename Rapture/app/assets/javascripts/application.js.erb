@@ -25,16 +25,21 @@ WinJS.Namespace.define("App", {
 
     navigation: {
     	showHome: function (categorie) {
-    		var renderHost = document.querySelector(".win-splitview-content");
+    		var renderHost = document.querySelector(".win-splitview-content-primary");
             WinJS.Utilities.empty(renderHost);
 	        WinJS.UI.Pages.render("/movies/home", renderHost, {
                 categorie: categorie
             });
     	},
         navigate: function (uri, parameters) {
-            var renderHost = document.querySelector(".win-splitview-content");
+            var renderHost = document.querySelector(".win-splitview-content-primary");
             WinJS.Utilities.empty(renderHost);
             WinJS.UI.Pages.render(uri, renderHost, parameters);
+        },
+        showMovieDetail: function (movie) {
+            var renderHost = document.querySelector(".win-splitview-content-secondary");
+            WinJS.Utilities.empty(renderHost);
+            WinJS.UI.Pages.render("/movies/detail", renderHost, movie);
         }
     },
     
@@ -67,6 +72,9 @@ WinJS.Namespace.define("App", {
         }),
         idConverter: WinJS.Binding.converter(function (url) {
             return "user_movie/" + url;
+        }),
+        hashConverter: WinJS.Binding.converter(function (url) {
+            return "#" + url;
         })
     }
 });
