@@ -12,6 +12,22 @@
                 if (App.home.listView.selection.count() == 1) {
                     App.home.listView.selection.getItems().done(function (items) {
                         items[0].data.user_inf.isFav = !items[0].data.user_inf.isFav;
+
+                        $.ajax({
+                             type: "POST",// GET in place of POST
+                             contentType: "application/json; charset=utf-8",
+                             url: "/user_movies",
+                             data : JSON.stringify({movie_id: items[0].data.movie.id,is_seen: false}),
+                             dataType: "json",
+                             success: function (result) {
+                                //do somthing here
+                                //window.alert("success!!");
+                             },
+                             error: function (){
+                                window.alert("something wrong!");
+                             }
+                        });
+
                         App.home.data.notifyMutated(items[0].index);
                     });
                 }
@@ -20,6 +36,23 @@
                 if (App.home.listView.selection.count() == 1) {
                     App.home.listView.selection.getItems().done(function (items) {
                         items[0].data.user_inf.isSeen = !items[0].data.user_inf.isSeen;
+                        
+                        //alert(items[0].data.movie.id);
+                        $.ajax({
+                             type: "POST",// GET in place of POST
+                             contentType: "application/json; charset=utf-8",
+                             url: "/user_movies",
+                             data : JSON.stringify({movie_id: items[0].data.movie.id,is_seen: true}),
+                             dataType: "json",
+                             success: function (result) {
+                                //do somthing here
+                                //window.alert("success!!");
+                             },
+                             error: function (){
+                                window.alert("something wrong!");
+                             }
+                        });
+
                         items[0].data.user_inf.isFav = true;
                         App.home.data.notifyMutated(items[0].index);
                     });
