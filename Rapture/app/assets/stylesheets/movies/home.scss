@@ -1,57 +1,82 @@
-/*#listView
-{
-    width: 100%;
-}*/
-
-.win-container {
-    margin: 2px !important;
-}
-
-/* Template for the items in the ListViews in this sample */       
-.homePosterTemplateItem
-{
-    /*width: 300px;
-    height: 500px;*/
-    overflow: hidden;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-}
-
-    .homePosterTemplateItem img.homePosterTemplateItem-Image 
-    {
-        width: 300px;
-        height: 450px;
-    }
-
-    .homePosterTemplateItem .homePosterTemplateItem-Detail
-    {
-        margin: 5px;
-        text-align: center;
-    }
-
-    .homePosterTemplateItem-ButtonSeen {
-        width:50%;
-        background-color: #1BA1E2;
-        color: white;
-        float: left;
-    }
-
-    .homePosterTemplateItem-ButtonFavorite {
-        width:50%;
-        background-color: #E3C800;
-        color: white;
-        float: left;
-    }
-
-   .listLayoutTopHeaderTemplateRoot {
-        font-size: larger;
-        margin-left: 16px;
-    }
-    
-/* CSS applied to the ListViews in this sample */
 #listView
 {
     height: 100%;
+
+    .header {
+        font-size: larger;
+        margin-left: 16px;
+        padding: 10px;
+        background-color: #333;
+
+        h2 {
+            margin-left: 40px;
+        }
+
+        .listView-header-icon, h2 {
+            display: inline-flex;
+            font-size: 3em;
+        }
+    }
+
+    .homePosterTemplateItem
+    {
+        /*width: 300px;
+        height: 500px;*/
+        overflow: hidden;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        flex-direction: column;
+
+        img.homePosterTemplateItem-Image 
+        {
+            width: 300px;
+            height: 450px;
+
+            &.deactivate {
+                filter: grayscale(70%);
+                -webkit-filter: grayscale(70%);
+                -moz-filter: grayscale(70%);
+                -o-filter: grayscale(70%);
+                -ms-filter: grayscale(70%);
+            }
+        }
+
+        .homePosterTemplateItem-Detail
+        {
+            margin: 5px;
+            text-align: center;
+        }
+
+        .homePosterTemplateItem-Buttons {
+            /*margin-top: 3px;*/
+            margin-bottom: 8px;
+
+            .homePosterTemplateItem-ButtonFavorite {
+                width:50%;
+                background-color: #E3C800;
+                color: white;
+                float: left;
+
+                &.deactivate {
+                    background-color: #666;
+                }
+            }
+
+            .homePosterTemplateItem-ButtonSeen {
+                width:50%;
+                background-color: #1BA1E2;
+                color: white;
+                float: left;
+
+                &.deactivate {
+                    background-color: #666;
+                }
+            }
+        }
+    }
+}
+
+.win-container {
+    margin: 2px !important;
 }

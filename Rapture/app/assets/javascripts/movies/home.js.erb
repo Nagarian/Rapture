@@ -1,24 +1,75 @@
 (function () {
     "use strict";
 
+    WinJS.Namespace.define("App.home", {
+        action: {
+            onItemInvoked: function (evInfo) {
+                App.home.data.getAt(evInfo.detail.itemIndex).user_inf.isSeen = true;
+                var toto = document.getElementById("listView").winControl;
+                toto.itemDataSource.list.notifyMutated(evInfo.detail.itemIndex);
+                /*evInfo.detail.itemPromise.then(function(item) {
+                    App.home.showMovieDetail(item);
+                });*/
+            },
+            onItemFavClick: function (evInfo) {
+                evInfo.detail.itemPromise.then(function(item) {
+                });
+            },
+            onItemSeenClick: function (evInfo) {
+                evInfo.detail.itemPromise.then(function(item) {
+                });
+            }
+        },
+        header: {
+            title: "",
+            subTitle: ""
+        },
+    });
+
     var ControlConstructor = WinJS.UI.Pages.define("/movies/home", {
         init : function (element, options) {
             function callback(responseText, status) {
                 if (status === 200) {
                     var items = JSON.parse(responseText);
                     
+                    for (var i = 0; i < items.length; i++) 
+                    { 
+                        items[i].FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                            App.home.action.onItemFavClick(e);
+                        });
+                        items[i].FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                            App.home.action.onItemSeenClick(e);
+                        });
+                    }
+
                     WinJS.Namespace.define("App.home", {
                         data: new WinJS.Binding.List(items)
                     });
                 } else {
                     output("Error obtaining feed. XHR status code: " + status);
                 }
-                
-                WinJS.UI.processAll();
             }
 
             function output(s) {
                 document.getElementById("content").innerHTML += s;
+            }
+
+            switch (options.categorie) {
+                case "popular":
+                    App.home.header = { title: "Film tendance", subTitle: "Découvrez les films qui font parler d'eux en ce moment.", icon: "go"};
+                    break;
+                case "now_playing":
+                    App.home.header = { title: "Dans les salles", subTitle: "Découvrez les films actuellement disponibles dans les salles de cinéma.", icon: "right"};
+                    break;
+                case "upcoming":
+                    App.home.header = { title: "A venir", subTitle: "Anticiper les prochaines sorties, et soyez le premier à être dans la salle de cinéma.", icon: "redo"};
+                    break;
+                case "top_rated":
+                    App.home.header = { title: "Les incontournables", subTitle: "Venez (re)découvrir les films que tout le monde à apprécier.", icon: "slideshow"};
+                    break;
+                case "mymovies":
+                    App.home.header = { title: "Mes films", subTitle: "Vous avez un doute ? N'attendez plus ! Regardez ici pour voir s'il y est.", icon: "slideshow"};
+                    break;
             }
 
             return WinJS.xhr({ url: '/movies/' + options.categorie + '.json', type: 'GET' }).then(
@@ -30,6 +81,13 @@
                 }
             );
 
+        },
+
+        ready : function (element, options) {
+            element.querySelector("#listView").winControl.oniteminvoked = App.home.action.onItemInvoked;
+            document.querySelector("#listView-header h2").innerText = App.home.header.title;
+            document.querySelector("#listView-header p").innerText = App.home.header.subTitle;
+            document.querySelector("#listView-header .listView-header-icon").innerText = WinJS.UI.AppBarIcon[App.home.header.icon];
         }
     });
 })();

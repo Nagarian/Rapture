@@ -12,7 +12,12 @@ Rails.application.routes.draw do
   get 'movies/upcoming'
   get 'movies/popular'
   get 'movies/top_rated'
-  get 'movies/mymovies' => 'movies#user_movies'
+
+  authenticate :user do
+    get 'movies/mymovies' => 'movies#user_movies'
+  end
+
+  get 'movies/detail(/:id)' => 'movies#detail'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
