@@ -4,20 +4,26 @@
     WinJS.Namespace.define("App.home", {
         action: {
             onItemInvoked: function (evInfo) {
-                App.home.data.getAt(evInfo.detail.itemIndex).user_inf.isSeen = true;
-                var toto = document.getElementById("listView").winControl;
-                toto.itemDataSource.list.notifyMutated(evInfo.detail.itemIndex);
-                /*evInfo.detail.itemPromise.then(function(item) {
+                evInfo.detail.itemPromise.then(function(item) {
                     App.home.showMovieDetail(item);
-                });*/
+                });
             },
             onItemFavClick: function (evInfo) {
-                evInfo.detail.itemPromise.then(function(item) {
-                });
+                if (App.home.listView.selection.count() == 1) {
+                    App.home.listView.selection.getItems().done(function (items) {
+                        items[0].data.user_inf.isFav = !items[0].data.user_inf.isFav;
+                        App.home.data.notifyMutated(items[0].index);
+                    });
+                }
             },
             onItemSeenClick: function (evInfo) {
-                evInfo.detail.itemPromise.then(function(item) {
-                });
+                if (App.home.listView.selection.count() == 1) {
+                    App.home.listView.selection.getItems().done(function (items) {
+                        items[0].data.user_inf.isSeen = !items[0].data.user_inf.isSeen;
+                        items[0].data.user_inf.isFav = true;
+                        App.home.data.notifyMutated(items[0].index);
+                    });
+                }
             }
         },
         header: {
@@ -37,13 +43,13 @@
                         items[i].FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
                             App.home.action.onItemFavClick(e);
                         });
-                        items[i].FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                        items[i].SeenClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
                             App.home.action.onItemSeenClick(e);
                         });
                     }
 
                     WinJS.Namespace.define("App.home", {
-                        data: new WinJS.Binding.List(items)
+                        data: new WinJS.Binding.List(items, {binding: true})
                     });
                 } else {
                     output("Error obtaining feed. XHR status code: " + status);
@@ -85,6 +91,7 @@
 
         ready : function (element, options) {
             element.querySelector("#listView").winControl.oniteminvoked = App.home.action.onItemInvoked;
+            App.home.listView = document.getElementById("listView").winControl;
             document.querySelector("#listView-header h2").innerText = App.home.header.title;
             document.querySelector("#listView-header p").innerText = App.home.header.subTitle;
             document.querySelector("#listView-header .listView-header-icon").innerText = WinJS.UI.AppBarIcon[App.home.header.icon];

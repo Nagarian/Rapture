@@ -7,7 +7,13 @@ json.array! @movies do |movie|
 	  	if user_movie != nil
 	      json.isSeen user_movie.is_seen
 	      json.isFav true
+        else
+          json.isSeen false
+	      json.isFav false
 		end
+	else
+      json.isSeen false
+      json.isFav false
 	end
   end
 end
