@@ -36,7 +36,31 @@
                         App.home.data.notifyMutated(items[0].index);
                     });
                 }
-            }
+            },
+            onFooterVisibilityChanged: WinJS.UI.eventHandler(function (evInfo) {
+                var visible = evInfo.detail.visible;
+                if (visible) {
+                    WinJS.UI.Animation.fadeIn(App.home.listView.footer.status);
+                    WinJS.xhr({ url: "/movies/suggestme.json", type: 'GET' }).then(
+                        function (result) {
+                            var items = JSON.parse(result.responseText);
+                            
+                            items.forEach(function (item) {
+                                item.FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                                    App.home.action.onItemFavClick(e);
+                                });
+                                item.SeenClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                                    App.home.action.onItemSeenClick(e);
+                                });
+                                App.home.data.push(item);
+                            });
+                        },
+                        function (result) {
+                            App.action.showErrorMessage(result);
+                        }
+                    );
+                }
+            })
         },
         header: {
             title: "",
@@ -137,19 +161,24 @@
         },
 
         processed: function (element, options) {
+            App.home.listView = document.getElementById("listView").winControl;
+            App.home.listView.oniteminvoked = App.home.action.onItemInvoked;
+            App.home.listView.footer.status = App.home.listView.footer.querySelector('.status');
+
+            document.querySelector("#listView-header h2").innerText = App.home.header.title;
+            document.querySelector("#listView-header p").innerText = App.home.header.subTitle;
+            document.querySelector("#listView-header .listView-header-icon").innerText = WinJS.UI.AppBarIcon[App.home.header.icon];
+
             if (window.location.hash.substring(1) == "mymovies") {
-                var toto = document.getElementById("listView").winControl;
-                toto.itemDataSource = App.home.data.dataSource;
-                toto.groupDataSource = App.home.data.groups.dataSource;
+                App.home.listView.itemDataSource = App.home.data.dataSource;
+                App.home.listView.groupDataSource = App.home.data.groups.dataSource;
+            } else if (window.location.hash.substring(1) == "suggestme") {
+                App.home.listView.onfootervisibilitychanged = App.home.action.onFooterVisibilityChanged;
+                WinJS.Utilities.removeClass(App.home.listView.footer, "hide");
             }
         },
 
         ready: function (element, options) {
-            element.querySelector("#listView").winControl.oniteminvoked = App.home.action.onItemInvoked;
-            App.home.listView = document.getElementById("listView").winControl;
-            document.querySelector("#listView-header h2").innerText = App.home.header.title;
-            document.querySelector("#listView-header p").innerText = App.home.header.subTitle;
-            document.querySelector("#listView-header .listView-header-icon").innerText = WinJS.UI.AppBarIcon[App.home.header.icon];
             WinJS.Binding.processAll(element);
             // WinJS.UI.Animation.enterPage([element.querySelector("#listView win-headercontainer"), element.querySelector("#listView win-surface"), element.querySelector("#listView win-footercontainer")], null);
         }

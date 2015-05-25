@@ -4,6 +4,15 @@
     <p data-win-bind="src: App.home.header.subTitle"></p>
 </div>
 
+<div id="listView-footer" class="footer hide">
+    <div class="status">
+        <label class="progressRingText">
+            <progress class="win-ring withText win-large"></progress>
+            <span>Chargement de nouvelles suggestions</span>
+        </label>
+    </div>
+</div>
+
 <div class="listView-groups-headerTemplate" data-win-control="WinJS.Binding.Template" style:"display: none">
     <div class="listView-groups-header">
         <div class="win-navbarcommand-icon listView-header-icon" data-win-bind="innerText: icon App.converter.winjsIconConverter"></div>
@@ -34,6 +43,7 @@
             itemTemplate: select('.homePosterTemplateTemplate'),
             groupHeaderTemplate: select('.listView-groups-headerTemplate'),
             header: select('#listView-header'),
+            footer: select('#listView-footer'),
             selectionMode: 'single',
             tapBehavior: 'directSelect',
             layout: { type: WinJS.UI.GridLayout, orientation: 'vertical' }}"
