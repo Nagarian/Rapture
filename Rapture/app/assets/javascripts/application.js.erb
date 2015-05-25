@@ -89,8 +89,11 @@ WinJS.Namespace.define("App", {
         deactivationButtonFavConverter: WinJS.Binding.converter(function (deactivate) {
             return "homePosterTemplateItem-ButtonFavorite" + (deactivate? " deactivate": "");
         }),
-        deactivationImageConverter : WinJS.Binding.converter(function (deactivate) {
+        deactivationImageConverter: WinJS.Binding.converter(function (deactivate) {
             return "homePosterTemplateItem-Image" + (deactivate? " deactivate" : "");
+        }),
+        winjsIconConverter: WinJS.Binding.converter(function (icon) {
+            return WinJS.UI.AppBarIcon[icon];
         })
     }
 });
