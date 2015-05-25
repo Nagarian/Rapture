@@ -1,6 +1,6 @@
 json.array! @movies do |movie|
   user_movie = current_user.user_movies.where(movie_id: movie["id"]).first
-  next if user_movie != nil && user_movie.is_seen
+  next if (user_movie != nil && user_movie.is_seen) || Date.parse(@movies[0]["release_date"]) > Date.today
 
   json.movie movie
   
