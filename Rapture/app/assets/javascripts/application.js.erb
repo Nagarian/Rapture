@@ -26,10 +26,12 @@ WinJS.Namespace.define("App", {
     navigation: {
     	showHome: function (categorie) {
     		var renderHost = document.querySelector(".win-splitview-content-primary");
-            WinJS.Utilities.empty(renderHost);
-	        WinJS.UI.Pages.render("/movies/home", renderHost, {
-                categorie: categorie
-            });
+            //WinJS.UI.Animation.exitPage(renderHost).done(function (success) {
+                WinJS.Utilities.empty(renderHost);
+                WinJS.UI.Pages.render("/movies/home", renderHost, {
+                    categorie: categorie
+                });
+            //});
     	},
         navigate: function (uri, parameters) {
             var renderHost = document.querySelector(".win-splitview-content-primary");
@@ -94,7 +96,13 @@ WinJS.Namespace.define("App", {
         }),
         winjsIconConverter: WinJS.Binding.converter(function (icon) {
             return WinJS.UI.AppBarIcon[icon];
-        })
+        }),
+        displayBlockIf: WinJS.Binding.converter(function(value) {
+            return (value === 0)? "flex" : "none";
+        }),
+        displayBlockIfNot: WinJS.Binding.converter(function(value) {
+            return (value === 0)? "none" : "block";
+        }),
     }
 });
 

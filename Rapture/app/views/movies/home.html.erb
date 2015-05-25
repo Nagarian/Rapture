@@ -36,9 +36,10 @@
             header: select('#listView-header'),
             selectionMode: 'single',
             tapBehavior: 'directSelect',
-            layout: { type: WinJS.UI.GridLayout, orientation: 'vertical' }
-    }">
+            layout: { type: WinJS.UI.GridLayout, orientation: 'vertical' }}"
+     data-win-bind="style.display: App.home.data.length App.converter.displayBlockIfNot">
 </div>
+<h4 class="noDataFound" data-win-bind="style.display: App.home.data.length App.converter.displayBlockIf">:( Vous n'avez rajouté aucun film</h4>
 
 <%= stylesheet_link_tag    'movies/home', media: 'all', 'data-turbolinks-track' => true %>
 <%= javascript_include_tag 'movies/home', 'data-turbolinks-track' => true %>

@@ -129,9 +129,11 @@
         },
 
         processed: function (element, options) {
-            var toto = document.getElementById("listView").winControl;
-            toto.itemDataSource = App.home.data.dataSource;
-            toto.groupDataSource = App.home.data.groups.dataSource;
+            if (window.location.hash.substring(1) == "mymovies") {
+                var toto = document.getElementById("listView").winControl;
+                toto.itemDataSource = App.home.data.dataSource;
+                toto.groupDataSource = App.home.data.groups.dataSource;
+            }
         },
 
         ready: function (element, options) {
@@ -140,6 +142,7 @@
             document.querySelector("#listView-header h2").innerText = App.home.header.title;
             document.querySelector("#listView-header p").innerText = App.home.header.subTitle;
             document.querySelector("#listView-header .listView-header-icon").innerText = WinJS.UI.AppBarIcon[App.home.header.icon];
+            WinJS.Binding.processAll(element);
             // WinJS.UI.Animation.enterPage([element.querySelector("#listView win-headercontainer"), element.querySelector("#listView win-surface"), element.querySelector("#listView win-footercontainer")], null);
         }
     });
