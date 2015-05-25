@@ -38,6 +38,11 @@ WinJS.Namespace.define("App", {
             WinJS.Utilities.empty(renderHost);
             WinJS.UI.Pages.render(uri, renderHost, parameters);
         },
+        search: function (query) {
+            var renderHost = document.querySelector(".win-splitview-content-primary");
+            WinJS.Utilities.empty(renderHost);
+            WinJS.UI.Pages.render("/movies/home", renderHost, { categorie: "search", search: query });
+        },
         showMovieDetail: function (movie) {
             var renderHost = document.querySelector(".win-splitview-content-secondary");
             WinJS.Utilities.empty(renderHost);
@@ -50,6 +55,9 @@ WinJS.Namespace.define("App", {
         },
         showErrorMessage: function (error) {
 
+        },
+        onQuerySubmitted: function (evInfo) {
+            App.navigation.search(evInfo.detail.queryText);
         }
     },
     animation: {
@@ -109,6 +117,8 @@ WinJS.Namespace.define("App", {
 WinJS.Binding.processAll(null, App).then(function () {
     WinJS.UI.processAll().done(function () {
         App.splitView = document.querySelector(".splitView").winControl;
+        App.searchBox = document.getElementById("searchBox").winControl;
+        App.searchBox.onquerysubmitted = App.action.onQuerySubmitted
         new WinJS.UI._WinKeyboard(App.splitView.paneElement); // Temporary workaround: Draw keyboard focus visuals on NavBarCommands
 
         var target1 = document.getElementById("MenuButton");

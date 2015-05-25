@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'movies/upcoming'
   get 'movies/popular'
   get 'movies/top_rated'
+  get 'movies/search/:search' => 'movies#search', format: 'json'
 
   authenticate :user do
     get 'movies/mymovies' => 'movies#user_movies'

@@ -1,7 +1,6 @@
 class MoviesController < ApplicationController
 
   def home
-    @movies = Tmdb::Movie.popular
     respond_to do |format|
       format.html { render "movies/home", layout: false }
     end
@@ -29,6 +28,16 @@ class MoviesController < ApplicationController
     @movies = Tmdb::Movie.top_rated
     
     respond_movies
+  end
+
+  def search
+    search = Tmdb::Search.new
+    search.resource('movie')
+    search.query(params[:search])
+    @movies = search.fetch
+    params[:format] = "json"
+    
+    render "movies/home", format: 'json'
   end
 
   def user_movies

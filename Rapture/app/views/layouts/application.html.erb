@@ -17,6 +17,12 @@
             </div>
 
             <div class="nav-commands">
+              <%#= link_to '#search', :class => 'win-splitview-link' do%>
+                  <!-- <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.search();" data-win-options="{ label: 'Rechercher', tooltip:'Rechercher un film', icon: 'find'}"></div> -->
+              <%# end %>
+
+              <!-- <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" /> -->
+
             	<%= link_to '#popular', :class => 'win-splitview-link' do%>
 					        <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('popular');" data-win-options="{ label: 'Film tendance', tooltip:'Voir les films populaires du moment', icon: 'go'}"></div>
             	<% end %>
@@ -63,25 +69,30 @@
 
       				<% end %>
               
-              <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />
+              <!-- <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" /> -->
 
-            	<%= link_to root_path, :class => 'win-splitview-link' do%>
-                	<div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Paramètres', icon: 'settings'}"></div>
-              <% end %>
-
-                <%#= link_to 'Edit profile', edit_user_registration_path, data: { "win-control": "WinJS.UI.NavBarCommand", "win-options": "{ label: 'Accueil', icon: 'home'}" } %>
+            	<%#= link_to root_path, :class => 'win-splitview-link' do%>
+                	<!-- <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Paramètres', icon: 'settings'}"></div> -->
+              <%# end %>
             </div>
         </div>
 
         <!-- Content area -->
         <div class="win-splitview-content">
-    			<% if notice %>
-    			  <p class="alert alert-success"><%= notice %></p>
-    			<% end %>
-    			<% if alert %>
-    			  <p class="alert alert-danger"><%= alert %></p>
-    			<% end %>
+          <div>
+            <div id="searchBox"
+                 data-win-control="WinJS.UI.SearchBox"
+                 data-win-options="{placeholderText: 'Taper le nom du film', focusOnKeyboardInput: true}"
+                 data-win-bind="onquerysubmitted: App.action.onQuerySubmitted">
+            </div>
+          </div>
           <div class="win-splitview-content win-splitview-content-primary">
+            <% if notice %>
+              <p class="alert alert-success"><%= notice %></p>
+            <% end %>
+            <% if alert %>
+              <p class="alert alert-danger"><%= alert %></p>
+            <% end %>
             <%= yield %>
           </div>
           <div class="win-splitview-content-secondary">

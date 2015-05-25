@@ -61,11 +61,12 @@
         }
     });
 
-    var ControlConstructor = WinJS.UI.Pages.define("/movies/home", {
+    WinJS.UI.Pages.define("/movies/home", {
         init : function (element, options) {
+            var url = '/movies/' + options.categorie + '.json';
             switch (options.categorie) {
                 case "popular":
-                    App.home.header = { title: "Film tendance", subTitle: "Découvrez les films qui font parler d'eux en ce moment.", icon: "go"};
+                    App.home.header = { title: "Films tendance", subTitle: "Découvrez les films qui font parler d'eux en ce moment.", icon: "go"};
                     break;
                 case "now_playing":
                     App.home.header = { title: "Dans les salles", subTitle: "Découvrez les films actuellement disponibles dans les salles de cinéma.", icon: "right"};
@@ -79,9 +80,13 @@
                 case "mymovies":
                     App.home.header = { title: "Mes films", subTitle: "Vous avez un doute ? N'attendez plus ! Regardez ici pour voir s'il y est.", icon: "slideshow"};
                     break;
+                case "search":
+                    App.home.header = { title: "Recherche de " + options.search, subTitle: "Voici les résultats de votre recherche", icon: "find"};
+                    url = "/movies/search/" + options.search;
+                    break;
             }
 
-            return WinJS.xhr({ url: '/movies/' + options.categorie + '.json', type: 'GET' }).then(
+            return WinJS.xhr({ url: url, type: 'GET' }).then(
                 function (result) {
                     var items = JSON.parse(result.responseText);
                     
