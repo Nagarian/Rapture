@@ -53,8 +53,8 @@
                 	  <div class="navbarCommand" data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Profil', icon: 'contactinfo', tooltip: 'Consulter le profil de <%= current_user.email %>'}" onclick="App.navigation.navigate('<%=edit_user_registration_path%>');"></div>
                 <% end %>
 
-	            	<%= link_to "##{destroy_user_session_path}", :class => 'win-splitview-link' do%>
-                	  <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Déconnexion', icon: 'blockcontact', tooltip: 'Se déconnecter de <%= current_user.email %>'}" onclick="App.navigation.navigate('<%=destroy_user_session_path%>');"></div>
+	            	<%= link_to "#{destroy_user_session_path}", :class => 'win-splitview-link', :method => :delete do%>
+                	  <div data-win-control="WinJS.UI.NavBarCommand" data-win-options="{ label: 'Déconnexion', icon: 'blockcontact', tooltip: 'Se déconnecter de <%= current_user.email %>'}"></div>
       	        <% end %>
 
               <% else %>
