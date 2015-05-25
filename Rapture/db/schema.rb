@@ -17,9 +17,9 @@ ActiveRecord::Schema.define(version: 20150519074541) do
   enable_extension "plpgsql"
 
   create_table "user_movies", force: :cascade do |t|
-    t.integer  "movie_id"
-    t.integer  "user_id"
-    t.boolean  "is_seen"
+    t.integer  "movie_id",   null: false
+    t.integer  "user_id",    null: false
+    t.boolean  "is_seen",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

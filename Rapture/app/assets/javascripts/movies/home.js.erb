@@ -12,21 +12,11 @@
                 if (App.home.listView.selection.count() == 1) {
                     App.home.listView.selection.getItems().done(function (items) {
                         items[0].data.user_inf.isFav = !items[0].data.user_inf.isFav;
+                        if (!items[0].data.user_inf.isFav) {
+                            items[0].data.user_inf.isSeen = false;
+                        }
 
-                        $.ajax({
-                             type: "POST",// GET in place of POST
-                             contentType: "application/json; charset=utf-8",
-                             url: "/user_movies",
-                             data : JSON.stringify({movie_id: items[0].data.movie.id,is_seen: false}),
-                             dataType: "json",
-                             success: function (result) {
-                                //do somthing here
-                                //window.alert("success!!");
-                             },
-                             error: function (){
-                                window.alert("something wrong!");
-                             }
-                        });
+                        App.home.movieAction.sendUserMovieUpdate(items[0].data);
 
                         App.home.data.notifyMutated(items[0].index);
                     });
@@ -36,24 +26,10 @@
                 if (App.home.listView.selection.count() == 1) {
                     App.home.listView.selection.getItems().done(function (items) {
                         items[0].data.user_inf.isSeen = !items[0].data.user_inf.isSeen;
-                        
-                        //alert(items[0].data.movie.id);
-                        $.ajax({
-                             type: "POST",// GET in place of POST
-                             contentType: "application/json; charset=utf-8",
-                             url: "/user_movies",
-                             data : JSON.stringify({movie_id: items[0].data.movie.id,is_seen: true}),
-                             dataType: "json",
-                             success: function (result) {
-                                //do somthing here
-                                //window.alert("success!!");
-                             },
-                             error: function (){
-                                window.alert("something wrong!");
-                             }
-                        });
-
                         items[0].data.user_inf.isFav = true;
+                        
+                        App.home.movieAction.sendUserMovieUpdate(items[0].data);
+
                         App.home.data.notifyMutated(items[0].index);
                     });
                 }
@@ -63,36 +39,27 @@
             title: "",
             subTitle: ""
         },
+        movieAction : {
+            sendUserMovieUpdate: function (item) {
+                $.ajax({
+                    type: "POST",// GET in place of POST
+                    contentType: "application/json; charset=utf-8",
+                    url: "/movies/mymovies/" + item.movie.id,
+                    data : JSON.stringify(JSON.stringify(item.user_inf.backingData)),
+                    dataType: "json",
+                    success: function (result) {
+                       App.action.showSuccessMessage(result);
+                    },
+                    error: function (errorMessage){
+                       App.action.showErrorMessage(errorMessage);
+                    }
+                });
+            }
+        }
     });
 
     var ControlConstructor = WinJS.UI.Pages.define("/movies/home", {
         init : function (element, options) {
-            function callback(responseText, status) {
-                if (status === 200) {
-                    var items = JSON.parse(responseText);
-                    
-                    for (var i = 0; i < items.length; i++) 
-                    { 
-                        items[i].FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
-                            App.home.action.onItemFavClick(e);
-                        });
-                        items[i].SeenClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
-                            App.home.action.onItemSeenClick(e);
-                        });
-                    }
-
-                    WinJS.Namespace.define("App.home", {
-                        data: new WinJS.Binding.List(items, {binding: true})
-                    });
-                } else {
-                    output("Error obtaining feed. XHR status code: " + status);
-                }
-            }
-
-            function output(s) {
-                document.getElementById("content").innerHTML += s;
-            }
-
             switch (options.categorie) {
                 case "popular":
                     App.home.header = { title: "Film tendance", subTitle: "Découvrez les films qui font parler d'eux en ce moment.", icon: "go"};
@@ -113,13 +80,27 @@
 
             return WinJS.xhr({ url: '/movies/' + options.categorie + '.json', type: 'GET' }).then(
                 function (result) {
-                    callback(result.responseText, result.status);
+                    var items = JSON.parse(result.responseText);
+                    
+                    for (var i = 0; i < items.length; i++) 
+                    { 
+                        items[i].FavClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                            App.home.action.onItemFavClick(e);
+                        });
+                        items[i].SeenClick= WinJS.Utilities.markSupportedForProcessing(function (e) { 
+                            App.home.action.onItemSeenClick(e);
+                        });
+                    }
+
+                    WinJS.Namespace.define("App.home", {
+                        data: new WinJS.Binding.List(items, {binding: true})
+                    });
                 },
+
                 function (result) {
-                    callback(null, result.status);
+                    App.action.showErrorMessage(result);
                 }
             );
-
         },
 
         ready : function (element, options) {

@@ -42,7 +42,14 @@ WinJS.Namespace.define("App", {
             WinJS.UI.Pages.render("/movies/detail", renderHost, movie);
         }
     },
-    
+    action: {
+        showSuccessMessage: function (message) {
+            
+        },
+        showErrorMessage: function (error) {
+
+        }
+    },
     animation: {
     	addPointerDown: function addPointerDownHandlers(target) {
     		function onPointerDown(evt) {

@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   
-  resources :user_movies
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
@@ -15,6 +14,8 @@ Rails.application.routes.draw do
 
   authenticate :user do
     get 'movies/mymovies' => 'movies#user_movies'
+    # resources :user_movies
+    post 'movies/mymovies/:movie_id' => 'user_movies#synchro'
   end
 
   get 'movies/detail(/:id)' => 'movies#detail'

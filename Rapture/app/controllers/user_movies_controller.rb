@@ -1,6 +1,31 @@
 class UserMoviesController < ApplicationController
   before_action :set_user_movie, only: [:show, :edit, :update, :destroy]
 
+  def synchro
+    params = user_movie_paramsPermitted
+    user_in_movie = current_user.user_movies.where(movie_id: params[:movie_id]).first
+    if user_in_movie != nil
+      if !params[:isFav]
+        user_in_movie.destroy
+        head :no_content
+      else
+        if user_in_movie.update(is_seen: params[:isSeen])
+          head :ok
+        else
+          render json: user_in_movie.errors, status: :unprocessable_entity
+        end
+      end
+    elsif params[:isFav]
+      user_movie = UserMovie.new(movie_id: params[:movie_id], is_seen: params[:isSeen])
+      current_user.user_movies.push(user_movie)
+      if current_user.save
+        head :created
+      else
+        render json: current_user.errors, status: :unprocessable_entity
+      end          
+    end
+  end
+
   # GET /user_movies
   # GET /user_movies.json
   def index
@@ -75,5 +100,15 @@ class UserMoviesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_movie_params
       params.require(:user_movie).permit(:movie_id, :is_seen)
+    end
+
+    def user_movie_paramsPermitted
+      params.permit(:movie_id, :_json)
+      json = JSON.parse params[:_json]
+      return paramsPretty = {
+        movie_id: params[:movie_id].to_i,
+        isSeen: json["isSeen"],
+        isFav: json["isFav"]
+      }
     end
 end
