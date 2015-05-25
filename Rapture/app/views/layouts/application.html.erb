@@ -44,7 +44,11 @@
       				<% if user_signed_in? %>
 	            	
                 <%= link_to '#mymovies', :class => 'win-splitview-link' do%>
-                  <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('mymovies');" data-win-options="{ label: 'Mes films', tooltip:'Voir les films de ma liste', icon: 'favorite'}"></div>
+                    <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('mymovies');" data-win-options="{ label: 'Mes films', tooltip:'Voir les films de ma liste', icon: 'favorite'}"></div>
+                <% end %>
+                
+                <%= link_to '#suggestme', :class => 'win-splitview-link' do%>
+                    <div data-win-control="WinJS.UI.NavBarCommand" onclick="App.navigation.showHome('suggestme');" data-win-options="{ label: 'MovieAdvisor©', tooltip:'A court de film ?', icon: 'shuffle'}"></div>
                 <% end %>
 
                 <hr class="win-command-horizontal" data-win-control="WinJS.UI.MenuCommand" data-win-options="{type: 'separator'}" />

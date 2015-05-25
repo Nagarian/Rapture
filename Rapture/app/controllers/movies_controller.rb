@@ -40,6 +40,13 @@ class MoviesController < ApplicationController
     render "movies/home", format: 'json'
   end
 
+  def suggestme
+    movie = current_user.user_movies.offset(rand(current_user.user_movies.count)).first.detail
+    @movies = Tmdb::Movie.similar_movies(movie["id"])
+    
+    respond_movies
+  end
+
   def user_movies
     respond_to do |format|
       format.html { render "movies/home", layout: false }

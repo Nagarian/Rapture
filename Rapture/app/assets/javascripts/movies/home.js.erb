@@ -84,6 +84,9 @@
                     App.home.header = { title: "Recherche de " + options.search, subTitle: "Voici les résultats de votre recherche", icon: "find"};
                     url = "/movies/search/" + options.search;
                     break;
+                case "suggestme":
+                    App.home.header = { title: "A court d'idée pour votre prochain film ? C'est par ici ->", subTitle: "Vous n'avez plus de film à regarder, mais votre soif insatiable vous tenaille, regardez nos propositions.", icon: "find"};
+                    break;
             }
 
             return WinJS.xhr({ url: url, type: 'GET' }).then(

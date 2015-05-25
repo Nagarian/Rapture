@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'movies/search/:search' => 'movies#search', format: 'json'
 
   authenticate :user do
+    get 'movies/suggestme'
     get 'movies/mymovies' => 'movies#user_movies'
     # resources :user_movies
     post 'movies/mymovies/:movie_id' => 'user_movies#synchro'
